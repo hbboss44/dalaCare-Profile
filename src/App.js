@@ -1,23 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import ProfilePage from './Profile/ProfilePage';
+import { Route, Router, Routes } from 'react-router-dom';
+import EditProfile from './Profile/EditProfile';
+import { useState } from 'react';
+import DisplayProfile from './Profile/DisplayProfile';
+import MyAddress from './Profile/MyAddress';
+import AddAddressOption from './Profile/AddAddressOption';
+import AddAddressManual from './Profile/AddAddressManual';
 
 function App() {
+   const [savedProfile, setSavedProfile] = useState(null);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+      
+        <Routes>
+          <Route path='/profile' element={<ProfilePage {...savedProfile}/>}/>
+          <Route path='/edit' element={<EditProfile setSavedProfile={setSavedProfile}/>}/>
+          <Route path='/display' element={<DisplayProfile {...savedProfile}/>}/>
+          <Route path='/address' element={<MyAddress/>}/>
+          <Route path='/add-option' element={<AddAddressOption/>}/>
+          <Route path='add-manual' element={<AddAddressManual/>}/>
+        </Routes>
     </div>
   );
 }
